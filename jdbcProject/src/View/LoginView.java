@@ -2,14 +2,22 @@ package View;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import DAO.LoginUserResponse;
+import Repository.UserRepository;
 
 public class LoginView extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -39,11 +47,16 @@ public class LoginView extends JFrame {
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("관리자 모드");
 		rdbtnNewRadioButton.setFont(new Font("굴림", Font.PLAIN, 23));
 		rdbtnNewRadioButton.setBounds(522, 235, 180, 38);
-		contentPane.add(rdbtnNewRadioButton);
+		
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("회원 모드");
 		rdbtnNewRadioButton_1.setFont(new Font("굴림", Font.PLAIN, 23));
 		rdbtnNewRadioButton_1.setBounds(522, 275, 180, 38);
+		
+		ButtonGroup radioGroup = new ButtonGroup();
+        radioGroup.add(rdbtnNewRadioButton);
+        radioGroup.add(rdbtnNewRadioButton_1);
+        contentPane.add(rdbtnNewRadioButton);
 		contentPane.add(rdbtnNewRadioButton_1);
 		
 		JButton btnNewButton = new JButton("로그인");
@@ -70,5 +83,35 @@ public class LoginView extends JFrame {
 		lblNewLabel_1_1.setFont(new Font("굴림", Font.PLAIN, 21));
 		lblNewLabel_1_1.setBounds(26, 353, 83, 34);
 		contentPane.add(lblNewLabel_1_1);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				int isAdmin = rdbtnNewRadioButton.isSelected()==true ? 1 : 0 ;
+				LoginUserResponse response = new LoginUserResponse(textField.getText(), textField_1.getText(), isAdmin);
+				boolean isLoggedin = false;
+				try {
+					isLoggedin = UserRepository.findByUsernameAndPwd(response);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				if(isLoggedin) {
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 확인하세요!", "Message",JOptionPane.ERROR_MESSAGE );
+				}
+				
+			}
+		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				SignUpView signUpView = new SignUpView();
+				signUpView.setVisible(true);
+			}
+		});
 	}
 }

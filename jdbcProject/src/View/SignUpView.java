@@ -2,12 +2,19 @@ package View;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import DAO.SaveUserResponse;
+import Repository.UserRepository;
 
 public class SignUpView extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -81,5 +88,39 @@ public class SignUpView extends JFrame {
 		textField_4.setColumns(10);
 		textField_4.setBounds(161, 593, 210, 36);
 		contentPane.add(textField_4);
+		
+		JButton btnSubmit = new JButton("완료");
+		btnSubmit.setBounds(37, 656, 169, 45);
+		contentPane.add(btnSubmit);
+		
+		JButton btnCancel = new JButton("취소");
+		btnCancel.setBounds(274, 656, 169, 45);
+		contentPane.add(btnCancel);
+		
+		btnSubmit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//TODO 회원가입 정보로 유저 만들기
+				SaveUserResponse response = new SaveUserResponse(textField.getText(), textField_1.getText(), textField_2.getText(),
+						textField_3.getText(), textField_4.getText());
+				try {
+					UserRepository.save(response);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				dispose();
+			}
+			
+		});
+		
+		btnCancel.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+			
+		});
 	}
 }

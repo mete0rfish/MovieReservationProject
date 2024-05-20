@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class SignUpWindowBuilder extends JFrame {
 
@@ -101,5 +102,13 @@ public class SignUpWindowBuilder extends JFrame {
 		textField_4.setColumns(10);
 		textField_4.setBounds(161, 593, 210, 36);
 		contentPane.add(textField_4);
+		
+		JButton btnNewButton = new JButton("완료");
+		btnNewButton.setBounds(37, 656, 169, 45);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("취소");
+		btnNewButton_1.setBounds(274, 656, 169, 45);
+		contentPane.add(btnNewButton_1);
 	}
 }
