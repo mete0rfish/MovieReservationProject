@@ -10,7 +10,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
-public class SignUpWindowBuilder extends JFrame {
+public class AdminPageWindowBuilder extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,7 +27,7 @@ public class SignUpWindowBuilder extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUpWindowBuilder frame = new SignUpWindowBuilder();
+					AdminPageWindowBuilder frame = new AdminPageWindowBuilder();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class SignUpWindowBuilder extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SignUpWindowBuilder() {
+	public AdminPageWindowBuilder() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 511, 753);
 		contentPane = new JPanel();
