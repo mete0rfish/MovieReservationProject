@@ -1,26 +1,24 @@
 package View;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Repository.AdminPageRepository;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 
-public class AdminViewWindowBuilder extends JFrame {
+import Repository.AdminPageRepository;
 
+public class AdminPage extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField tfQuery;
@@ -44,7 +42,7 @@ public class AdminViewWindowBuilder extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AdminViewWindowBuilder() {
+	public AdminPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -83,6 +81,7 @@ public class AdminViewWindowBuilder extends JFrame {
 			}
 		});
 		listTable.setBounds(33, 10, 717, 263);
+		listTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		pnShowAllTable.add(listTable);
 		
 		JButton btnShowTableContent = new JButton("테이블 내용 보기");
@@ -143,6 +142,17 @@ public class AdminViewWindowBuilder extends JFrame {
 			
 		});
 		
+		btnExecute.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO 쿼리 받아서 Repository로 넘겨주기
+				String sql = tfQuery.getText();
+				AdminPageRepository.executeQuery(sql);
+			}
+			
+		});
+		
 		btnReadAllTable.addActionListener(new ActionListener() {
 
 			@Override
@@ -150,6 +160,26 @@ public class AdminViewWindowBuilder extends JFrame {
 				pnInit.setVisible(false);
 				pnQuery.setVisible(false);
 				pnShowAllTable.setVisible(true);
+			}
+			
+		});
+		
+		btnShowTableContent.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 리스트에서 테이블 명 받아오기
+				String selectedValue = (String) listTable.getSelectedValue();
+				System.out.println("선택됨: " + selectedValue);
+				// TableContentView 실행하기 + 인자로 이름 넘기기
+				TableContentView tableContentView;
+				try {
+					tableContentView = new TableContentView(selectedValue);
+					tableContentView.setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			
 		});

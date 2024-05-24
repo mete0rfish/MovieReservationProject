@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import DAO.LoginUserResponse;
+import Repository.JdbcConnect;
 import Repository.UserRepository;
 
 public class LoginView extends JFrame {
@@ -50,15 +51,18 @@ public class LoginView extends JFrame {
 		btnAdmin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				JdbcConnect.adminJdbcConnect();
+				AdminPage adminPage = new AdminPage();
+				adminPage.setVisible(true);
+				//dispose();
 			}
 		});
 		
 		btnUser.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				JdbcConnect.userJdbcConnect();
+				dispose();
 			}
 		});
 	}
