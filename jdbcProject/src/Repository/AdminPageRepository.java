@@ -208,6 +208,33 @@ public class AdminPageRepository {
 		return null;
 	}
 	
+	public static ArrayList<HashMap<String, Object>> findMovieByName(String name,String keyword) throws SQLException {
+		try {
+			String sql = "SELECT * FROM movie WHERE " + name + " LIKE ?";
+			pstmt = JdbcConnect.conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + keyword + "%");
+			rs = pstmt.executeQuery();
+			
+
+			ResultSetMetaData md = rs.getMetaData();
+			int columns = md.getColumnCount();
+			ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+		
+			while(rs.next()) {
+				HashMap<String, Object> row = new HashMap<>(columns);
+				for(int i=1;i<=columns;i++) {
+					row.put(md.getColumnName(i), rs.getObject(i));
+				}
+				list.add(row);
+			}
+			return list;
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public static void executeQuery(String sql) {
 		try {
 			stmt = JdbcConnect.conn.createStatement();
