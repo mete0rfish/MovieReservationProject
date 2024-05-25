@@ -152,6 +152,9 @@ public class AdminPageRepository {
 			+ "    ON UPDATE CASCADE)"
 			+ "ENGINE = InnoDB;";
 	
+	private static String createUserAccountSql = "create user IF NOT EXISTS 'user'@'%' identified by 'user1';";
+	private static String grantUserAccountSql = "grant all privileges on db1.* to user@'%';";
+	
 	public static void ExecuteInitSql() throws SQLException {
 		stmt = JdbcConnect.conn.createStatement();
 		try {
@@ -174,6 +177,9 @@ public class AdminPageRepository {
 			stmt.execute(createMssSql);
 			stmt.execute(createTicketSql);
 			stmt.execute(createReservationSql);
+			
+			stmt.execute(createUserAccountSql);
+			stmt.execute(grantUserAccountSql);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
