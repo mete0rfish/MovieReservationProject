@@ -35,10 +35,11 @@ public class TableContentView extends JFrame {
 		
 		table = new JTable(tableModel);
 		table.setBounds(22, 105, 741, 448);
+		contentPane.add(table);
 		
-		JScrollPane scrollPane = new JScrollPane(table);
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
+//		JScrollPane scrollPane = new JScrollPane(table);
+//		contentPane.add(scrollPane, BorderLayout.CENTER);
+//		
 		JLabel lblTableName = new JLabel(tableName);
 		lblTableName.setFont(new Font("Gulim", Font.PLAIN, 32));
 		lblTableName.setBounds(270, 23, 441, 66);
@@ -53,6 +54,8 @@ public class TableContentView extends JFrame {
 		// 칼럼 명과 첫번째 HashMap 추출
 		HashMap<String, Object> firstRow = res.get(0);
 		String[] columnNames = firstRow.keySet().toArray(new String[0]);
+		
+		//System.out.println(firstRow.toString());
 		
 		// table 모델 생성
 		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);

@@ -152,6 +152,9 @@ public class AdminPageRepository {
 			+ "    ON UPDATE CASCADE)"
 			+ "ENGINE = InnoDB;";
 	
+	private static String createUserAccountSql = "create user IF NOT EXISTS 'user'@'%' identified by 'user1';";
+	private static String grantUserAccountSql = "grant all privileges on db1.* to user@'%';";
+	
 	public static void ExecuteInitSql() throws SQLException {
 		stmt = JdbcConnect.conn.createStatement();
 		try {
@@ -175,6 +178,9 @@ public class AdminPageRepository {
 			stmt.execute(createTicketSql);
 			stmt.execute(createReservationSql);
 			
+			stmt.execute(createUserAccountSql);
+			stmt.execute(grantUserAccountSql);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -191,11 +197,9 @@ public class AdminPageRepository {
 			int columns = md.getColumnCount();
 			ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 		
-			System.out.println("컬럼수: " + columns);
 			while(rs.next()) {
 				HashMap<String, Object> row = new HashMap<>(columns);
 				for(int i=1;i<=columns;i++) {
-					// 칼렴명, 데이터
 					row.put(md.getColumnName(i), rs.getObject(i));
 				}
 				list.add(row);
