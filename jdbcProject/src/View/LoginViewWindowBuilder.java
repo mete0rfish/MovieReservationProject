@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Repository.JdbcConnect;
+
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import java.awt.Font;
@@ -21,6 +24,7 @@ public class LoginViewWindowBuilder extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
