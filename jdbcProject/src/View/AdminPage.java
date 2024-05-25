@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
 import Repository.AdminPageRepository;
+import Repository.InitDataRepository;
 
 public class AdminPage extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -121,6 +122,7 @@ public class AdminPage extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					AdminPageRepository.ExecuteInitSql();
+					InitDataRepository.initMovieData();
 					pnInit.setVisible(true);
 					pnQuery.setVisible(false);
 					pnShowAllTable.setVisible(false);

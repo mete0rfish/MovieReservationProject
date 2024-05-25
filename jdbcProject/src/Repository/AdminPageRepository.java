@@ -197,11 +197,9 @@ public class AdminPageRepository {
 			int columns = md.getColumnCount();
 			ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 		
-			System.out.println("컬럼수: " + columns);
 			while(rs.next()) {
 				HashMap<String, Object> row = new HashMap<>(columns);
 				for(int i=1;i<=columns;i++) {
-					// 칼렴명, 데이터
 					row.put(md.getColumnName(i), rs.getObject(i));
 				}
 				list.add(row);
