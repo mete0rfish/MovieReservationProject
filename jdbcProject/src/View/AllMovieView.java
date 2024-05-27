@@ -38,7 +38,12 @@ public class AllMovieView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField searchField;
+	private JComboBox comboBox;
+	private JButton searchButton;
+	private JPanel viewPanel;
+	private JPanel buttonPanel;
+	private JTable table;
 
 	public AllMovieView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,84 +54,62 @@ public class AllMovieView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(128, 128, 128));
-		panel.setBounds(12, 98, 762, 455);
-		contentPane.add(panel);
+		viewPanel = new JPanel();
+		viewPanel.setBackground(new Color(128, 128, 128));
+		viewPanel.setBounds(12, 98, 762, 455);
+		contentPane.add(viewPanel);
 		
-		String header[] = {"영화명", "감독명", "장르", "상영시간","상영등급", "개봉일","배우명","영화정보","평점"};
-		String contents[][] = MovieRepository.findAll();
+		allMovieButton();
 		
-		JTable table = new JTable();
-		JScrollPane scrollpane = new JScrollPane(table);
-		panel.add(scrollpane);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setBounds(12, 20, 268, 57);
+		contentPane.add(buttonPanel);
+		buttonPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(12, 20, 268, 57);
-		contentPane.add(panel_1);
-		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JButton btnAllMovie = new JButton("모든 영화 ");
-		btnAllMovie.setBackground(new Color(92, 92, 92));
-		panel_1.add(btnAllMovie);
-		
-		JButton btnMyRes = new JButton("내 예약");
-		btnMyRes.addActionListener(new ActionListener() {
+		JButton btnNewButton = new JButton("모든 영화 ");
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO 내예약으로 이동하기
 				
-				dispose();
+				
+				allMovieButton();
 			}
 		});
-		panel_1.add(btnMyRes);
+		btnNewButton.setBackground(new Color(92, 92, 92));
+		buttonPanel.add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBounds(392, 39, 299, 38);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JButton btnNewButton_1 = new JButton("내 예약");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				
+			}
+		});
+		buttonPanel.add(btnNewButton_1);
 		
-		JButton btnSearch = new JButton("검색");
-		btnSearch.setBounds(691, 39, 67, 38);
-		contentPane.add(btnSearch);
+		searchField = new JTextField();
+		searchField.setBounds(392, 39, 299, 38);
+		contentPane.add(searchField);
+		searchField.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		JButton searchButton = new JButton("검색");
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchMovieButton();
+			}
+		});
+		searchButton.setBounds(691, 39, 67, 38);
+		contentPane.add(searchButton);
+	
+		
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"영화명", "감독명", "배우명", "장르"}));
 		comboBox.setBounds(295, 39, 95, 38);
 		contentPane.add(comboBox);
-		
-		btnSearch.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String sql = "select * from movie where ";
-				String searchText = textField.getText();
-				String selectedItem = (String) comboBox.getSelectedItem();
-				switch(selectedItem) {
-				case "영화명":
-					sql += "영화명 = '%" + searchText + "%';";
-					break;
-				case "감독명":
-					sql += "감독명 = '%" + searchText + "%';";
-					break;
-				case "배우명":
-					sql += "배우명 = '%" + searchText + "%';";
-					break;
-				case "장르":
-					sql += "장르 = '%" + searchText + "%';";
-					break;
-				default:
-					break;
-				}
-				// TODO  sql문으로 영화 리스트 받아오기
-				
-			}
-			
-		});
 	}
 	
 	
 	
-	private DefaultTableModel initTable(String tableName) throws SQLException {
+private DefaultTableModel initTable(String tableName) throws SQLException {
 		
 		ArrayList<HashMap<String, Object>> res = AdminPageRepository.findAllByName(tableName);
 		
@@ -140,7 +123,6 @@ public class AllMovieView extends JFrame {
 		
 		// table 모델 생성
 		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-		
 		// 테이블 모델에 투플 추가
 		for (HashMap<String, Object> rowMap : res) {
             Object[] rowData = new Object[columnNames.length];
@@ -150,5 +132,80 @@ public class AllMovieView extends JFrame {
             tableModel.addRow(rowData);
         }
 		return tableModel;
+	}
+	
+	private DefaultTableModel findMovieTable(String name,String keyword) throws SQLException {
+		
+		ArrayList<HashMap<String, Object>> res = AdminPageRepository.findMovieByName(name,keyword);
+		
+		if(res.size() <= 0)
+			return null;
+		// 칼럼 명과 첫번째 HashMap 추출
+		HashMap<String, Object> firstRow = res.get(0);
+		String[] columnNames = firstRow.keySet().toArray(new String[0]);
+		
+		System.out.println(firstRow.toString());
+		
+		// table 모델 생성
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		// 테이블 모델에 투플 추가
+		for (HashMap<String, Object> rowMap : res) {
+            Object[] rowData = new Object[columnNames.length];
+            for (int i = 0; i < columnNames.length; i++) {
+                rowData[i] = rowMap.get(columnNames[i]);
+            }
+            tableModel.addRow(rowData);
+        }
+		return tableModel;
+	}
+	private void searchMovieButton() {
+		try {
+			String comboBoxName = (String)comboBox.getSelectedItem();
+			String name;
+			switch(comboBoxName) {
+			case"영화명":
+				name = "m_name";
+				break;
+			case"감독명":
+				name = "m_director";
+				break;
+			case"배우명":
+				name = "m_actor";
+				break;
+			case"장르":
+				name = "m_genre";
+				break;
+			default:
+				name = "m_name";
+				break;
+			}
+			
+			DefaultTableModel tableModel = findMovieTable(name,searchField.getText());
+			table = new JTable(tableModel);
+			table.setBounds(22, 105, 741, 448);
+			viewPanel.removeAll();
+			viewPanel.add(table);
+			viewPanel.revalidate();
+			viewPanel.repaint();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
+	private void allMovieButton() {
+		DefaultTableModel tableModel = null;
+		try {
+			tableModel = initTable("movie");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		table = new JTable(tableModel);
+		table.setBounds(22, 105, 741, 448);
+		viewPanel.removeAll();
+		viewPanel.add(table);
+		viewPanel.revalidate();
+		viewPanel.repaint();
 	}
 }

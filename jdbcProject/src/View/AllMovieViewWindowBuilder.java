@@ -39,6 +39,7 @@ public class AllMovieViewWindowBuilder extends JFrame {
 	 */
 	public static void main(String[] args) {
 		JdbcConnect.userJdbcConnect(); //test
+		System.out.println("dd");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
