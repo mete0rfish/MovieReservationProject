@@ -1,12 +1,13 @@
 package sql;
 
 public class MovieScheduleSeatSql {
-	public static int maxIdx = 361;
+	public static int maxIdx = 360;
 	public static String mssArr[] = new String[maxIdx];
 	
 	public static void initMovieScheduleSeatSql() {
-		int id= 1, msid, sid= 1;
-        for (msid = 1; msid <= 36; msid++) {
+		int id= 1, sid= 1;
+        for (int msid = 1; msid <= 36; msid++) {
+
             if (msid <= 3)
                 sid = 1;
             else if (msid <= 6)
@@ -35,8 +36,10 @@ public class MovieScheduleSeatSql {
 	            sid = 12;
 
             for(int i = 1; i <=10; i ++){
+            	System.out.println("msid:" + msid + ", sid: " + sid);
+            	int seat_id = (sid-1)*10+i;
             	mssArr[id-1] = "insert into movie_schedule_seat values\n" 
-                    + "(" + id + "," + "1," + msid + "," + (sid-1)*10+i + ");";
+                    + "(" + id + "," + "1," + msid + "," + seat_id + ");";
             	id++;    
             }
 		}
