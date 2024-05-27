@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="48bc765c-3b4b-49b3-a7ee-33c644b8fbad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../src/Repository/ReservationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/View/MyReservationView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/View/MyReservationWindowBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/sql/ReservationSql.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../src/sql/TicketSql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/AdminPageRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/AdminPageRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repository/JdbcConnect.class" beforeDir="false" afterPath="$PROJECT_DIR$/Repository/JdbcConnect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AdminPage$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AdminPage$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AdminPage$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AdminPage$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AdminPage$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AdminPage$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AdminPage$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AdminPage$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AdminPage$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AdminPage$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AdminPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AdminPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AllMovieView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AllMovieView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AllMovieView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AllMovieView$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/AllMovieView.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/AllMovieView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/LoginView$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/LoginView$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/LoginView.class" beforeDir="false" afterPath="$PROJECT_DIR$/View/LoginView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Repository/AdminPageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Repository/AdminPageRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Repository/InitDataRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Repository/InitDataRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Repository/JdbcConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/Repository/JdbcConnect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/View/AdminPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/View/AdminPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/View/AllMovieView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/View/AllMovieView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/View/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/View/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sql/MovieScheduleSeatSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sql/MovieScheduleSeatSql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sql/MovieScheduleSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sql/MovieScheduleSql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sql/SeatSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sql/SeatSql.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sql/UserSql.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sql/UserSql.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2h3EDnGsm6TJXPlkgsNXkxPWcr9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\glesu\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\glesu\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\glesu\\AppData\\Local\\Symbols\\src"
+    ]
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="48bc765c-3b4b-49b3-a7ee-33c644b8fbad" name="Changes" comment="" />
+      <created>1716814245474</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716814245474</updated>
+      <workItem from="1716814249432" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

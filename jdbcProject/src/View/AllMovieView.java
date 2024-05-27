@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -69,6 +70,18 @@ public class AllMovieView extends JFrame {
 		JButton btnNewButton = new JButton("모든 영화 ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				// TODO 내예약으로 이동하기
+				MyReservationView myRes;
+				try {
+					myRes = new MyReservationView();
+					myRes.setVisible(true);
+					setVisible(false);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				
 				
 				allMovieButton();

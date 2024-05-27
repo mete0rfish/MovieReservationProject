@@ -122,7 +122,6 @@ public class AdminPage extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					AdminPageRepository.ExecuteInitSql();
-					InitDataRepository.initMovieData();
 					pnInit.setVisible(true);
 					pnQuery.setVisible(false);
 					pnShowAllTable.setVisible(false);

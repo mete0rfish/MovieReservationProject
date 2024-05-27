@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static Repository.InitDataRepository.*;
+
 public class AdminPageRepository {
 	
 	private static Statement stmt;
@@ -23,7 +25,7 @@ public class AdminPageRepository {
 			+ "  `m_id` INT NOT NULL AUTO_INCREMENT,"
 			+ "  `m_name` VARCHAR(20) NOT NULL,"
 			+ "  `m_director` VARCHAR(10) NULL,"
-			+ "  `m_genre` VARCHAR(10) NULL,"
+			+ "  `m_genre` VARCHAR(50) NULL,"
 			+ "  `m_running_time` INT NULL,"
 			+ "  `m_film_rating` VARCHAR(10) NULL,"
 			+ "  `m_release_date` DATE NOT NULL,"
@@ -152,8 +154,8 @@ public class AdminPageRepository {
 			+ "    ON UPDATE CASCADE)"
 			+ "ENGINE = InnoDB;";
 	
-	private static String createUserAccountSql = "create user IF NOT EXISTS 'user'@'%' identified by 'user1';";
-	private static String grantUserAccountSql = "grant all privileges on db1.* to user@'%';";
+	private static String createUserAccountSql = "create user IF NOT EXISTS 'user1'@'%' identified by 'user1';";
+	private static String grantUserAccountSql = "grant all privileges on db1.* to user1@'%';";
 	
 	public static void ExecuteInitSql() throws SQLException {
 		stmt = JdbcConnect.conn.createStatement();
@@ -180,6 +182,15 @@ public class AdminPageRepository {
 			
 			stmt.execute(createUserAccountSql);
 			stmt.execute(grantUserAccountSql);
+			
+			initUserData();
+			initMovieData();
+			initTheatherData();
+			initSeatData();
+			initMovieScheduleData();
+			initMovieScheduleSeatData();
+			initTicketData();
+			initReservationData();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
