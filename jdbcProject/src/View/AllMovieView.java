@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -16,7 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
+import Repository.AdminPageRepository;
 import Repository.MovieRepository;
 
 /*
@@ -117,5 +122,33 @@ public class AllMovieView extends JFrame {
 			}
 			
 		});
+	}
+	
+	
+	
+	private DefaultTableModel initTable(String tableName) throws SQLException {
+		
+		ArrayList<HashMap<String, Object>> res = AdminPageRepository.findAllByName(tableName);
+		
+		if(res.size() <= 0)
+			return null;
+		// 칼럼 명과 첫번째 HashMap 추출
+		HashMap<String, Object> firstRow = res.get(0);
+		String[] columnNames = firstRow.keySet().toArray(new String[0]);
+		
+		//System.out.println(firstRow.toString());
+		
+		// table 모델 생성
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		
+		// 테이블 모델에 투플 추가
+		for (HashMap<String, Object> rowMap : res) {
+            Object[] rowData = new Object[columnNames.length];
+            for (int i = 0; i < columnNames.length; i++) {
+                rowData[i] = rowMap.get(columnNames[i]);
+            }
+            tableModel.addRow(rowData);
+        }
+		return tableModel;
 	}
 }
