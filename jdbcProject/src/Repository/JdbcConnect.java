@@ -28,7 +28,7 @@ public class JdbcConnect {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db1"
-					, "user", "user1");
+					, "user1", "user1");
 			System.out.println("DB 연결 완료");
 			stmt = conn.createStatement();
 			

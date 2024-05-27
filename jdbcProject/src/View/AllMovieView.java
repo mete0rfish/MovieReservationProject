@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -69,6 +70,14 @@ public class AllMovieView extends JFrame {
 		btnMyRes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO 내예약으로 이동하기
+				MyReservationView myRes;
+				try {
+					myRes = new MyReservationView();
+					myRes.setVisible(true);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				dispose();
 			}
