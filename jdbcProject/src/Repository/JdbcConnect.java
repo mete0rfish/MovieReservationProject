@@ -17,6 +17,7 @@ public class JdbcConnect {
 			stmt = conn.createStatement();
 			
 		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
 			System.out.println("JDBC 드라이버 로드 에러");
 		} catch(SQLException e) {
 			System.out.println("SQL 실행 에러");

@@ -74,6 +74,7 @@ public class AllMovieView extends JFrame {
 				try {
 					myRes = new MyReservationView();
 					myRes.setVisible(true);
+					setVisible(false);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

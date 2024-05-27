@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static Repository.InitDataRepository.*;
+
 public class AdminPageRepository {
 	
 	private static Statement stmt;
@@ -180,6 +182,15 @@ public class AdminPageRepository {
 			
 			stmt.execute(createUserAccountSql);
 			stmt.execute(grantUserAccountSql);
+			
+			initUserData();
+			initMovieData();
+			initTheatherData();
+			initSeatData();
+			initMovieScheduleData();
+			initMovieScheduleSeatData();
+			initTicketData();
+			initReservationData();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

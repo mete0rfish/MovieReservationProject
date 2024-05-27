@@ -2,10 +2,11 @@ package sql;
 
 public class MovieScheduleSql {
  // 앞: movie, 뒤: theater
-	public static String[] movieScheduleArr;
+	public static String[] movieScheduleArr = new String[40];
+	public static int MAX = 36;
 	
 	public static void initMovieScheduleArr() {
-		movieScheduleArr[0] = "insert into movie_schedule values\r\n"
+		movieScheduleArr[0] = "insert into movie_schedule values"
 				+ "	(1,'2023-06-01','목요일','1','07:00:00',1,1);";
 		movieScheduleArr[1] = "insert into movie_schedule values\r\n"
 				+ "	(2,'2023-06-01','목요일','2','10:00:00',2,1);";

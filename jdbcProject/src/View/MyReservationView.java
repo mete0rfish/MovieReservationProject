@@ -25,11 +25,6 @@ public class MyReservationView extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	
-	/**
-	 * Create the frame.
-	 * @throws SQLException 
-	 */
 	public MyReservationView() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -52,15 +47,17 @@ public class MyReservationView extends JFrame{
 		JButton btnAllMovie = new JButton("모든 영화 ");
 		btnAllMovie.setBackground(new Color(92, 92, 92));
 		panel_1.add(btnAllMovie);
-		
-		JButton btnMyRes = new JButton("내 예약");
-		btnMyRes.addActionListener(new ActionListener() {
+		btnAllMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO 내예약으로 이동하기
-				
+				// TODO 모든 영화로 이동하기
+				AllMovieView allMovie = new AllMovieView();
+				allMovie.setVisible(true);
+				setVisible(false);
 				dispose();
 			}
 		});
+		
+		JButton btnMyRes = new JButton("내 예약");
 		panel_1.add(btnMyRes);
 		panel.setLayout(null);
 		

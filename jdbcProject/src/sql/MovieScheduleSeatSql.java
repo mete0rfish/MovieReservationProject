@@ -2,7 +2,7 @@ package sql;
 
 public class MovieScheduleSeatSql {
 	public static int maxIdx = 361;
-	public static String mssArr[];
+	public static String mssArr[] = new String[maxIdx];
 	
 	public static void initMovieScheduleSeatSql() {
 		int id= 1, msid, sid= 1;

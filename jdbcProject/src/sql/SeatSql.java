@@ -2,7 +2,7 @@ package sql;
 
 public class SeatSql {
 	
-	public static String[][] seatSqlArr;
+	public static String[][] seatSqlArr = new String[13][11];
 	private static int idx = 1;
 
 	

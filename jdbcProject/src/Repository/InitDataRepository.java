@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import sql.MovieScheduleSeatSql;
+import sql.MovieScheduleSql;
 import sql.SeatSql;
 
 import static sql.SeatSql.*;
@@ -12,6 +14,9 @@ import static sql.movieSql.*;
 import static sql.TheaterSql.*;
 import static sql.UserSql.*;
 import static sql.MovieScheduleSql.*;
+import static sql.TicketSql.*;
+import static sql.ReservationSql.*;
+
 
 public class InitDataRepository {
 	
@@ -54,6 +59,7 @@ public class InitDataRepository {
 	public static void initSeatData() throws SQLException {
 		SeatSql.initSeatSql();
 		stmt = JdbcConnect.conn.createStatement();
+
 		for(int i=0;i<12;i++) {
 			for(int j=0;j<10;j++) {
 				stmt.execute(seatSqlArr[i][j]);
@@ -79,8 +85,50 @@ public class InitDataRepository {
 	
 	public static void initMovieScheduleData() throws SQLException {
 		stmt = JdbcConnect.conn.createStatement();
-		for(int i=0;i<movieScheduleArr.length; i++) {
+		initMovieScheduleArr();
+		for(int i=0;i<MovieScheduleSql.MAX; i++) {
 			stmt.execute(movieScheduleArr[i]);
 		}
+	}
+	
+	public static void initTicketData() throws SQLException {
+		stmt = JdbcConnect.conn.createStatement();
+		stmt.execute(Ticket1Sql);
+		stmt.execute(Ticket2Sql);
+		stmt.execute(Ticket3Sql);
+		stmt.execute(Ticket4Sql);
+		stmt.execute(Ticket5Sql);
+		stmt.execute(Ticket6Sql);
+		stmt.execute(Ticket7Sql);
+		stmt.execute(Ticket8Sql);
+		stmt.execute(Ticket9Sql);
+		stmt.execute(Ticket10Sql);
+		stmt.execute(Ticket11Sql);
+		stmt.execute(Ticket12Sql);
+	}
+	
+	public static void initMovieScheduleSeatData() throws SQLException{
+		stmt = JdbcConnect.conn.createStatement();
+		MovieScheduleSeatSql.initMovieScheduleSeatSql();
+		for(int i=0;i<MovieScheduleSeatSql.maxIdx;i++) {
+			stmt.execute(MovieScheduleSeatSql.mssArr[i]);
+		}
+	}
+	
+	public static void initReservationData() throws SQLException{
+		stmt = JdbcConnect.conn.createStatement();
+		
+		stmt.execute(reservation1Sql);
+		stmt.execute(reservation2Sql);
+		stmt.execute(reservation3Sql);
+		stmt.execute(reservation4Sql);
+		stmt.execute(reservation5Sql);
+		stmt.execute(reservation6Sql);
+		stmt.execute(reservation7Sql);
+		stmt.execute(reservation8Sql);
+		stmt.execute(reservation9Sql);
+		stmt.execute(reservation10Sql);
+		stmt.execute(reservation11Sql);
+		stmt.execute(reservation12Sql);
 	}
 }
