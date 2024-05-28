@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Repository.AdminPageRepository;
+import Repository.JdbcConnect;
 import Repository.ReservationRepository;
 
 import javax.swing.JLabel;
@@ -35,6 +36,7 @@ public class MyReservationWindowBuilder extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					JdbcConnect.userJdbcConnect();
 					MyReservationWindowBuilder frame = new MyReservationWindowBuilder();
 					frame.setVisible(true);
 				} catch (Exception e) {

@@ -64,7 +64,7 @@ public class LoginView extends JFrame {
 				JdbcConnect.userJdbcConnect();
 				AllMovieView allMovieView = new AllMovieView();
 				allMovieView.setVisible(true);
-				dispose();
+				//dispose();
 			}
 		});
 	}
