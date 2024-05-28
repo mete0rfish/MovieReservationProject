@@ -98,7 +98,14 @@ public class AllMovieViewWindowBuilder extends JFrame {
 		JButton btnNewButton_1 = new JButton("내 예약");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				try {
+					MyReservationView myRes = new MyReservationView();
+					myRes.setVisible(true);
+					setVisible(false);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});

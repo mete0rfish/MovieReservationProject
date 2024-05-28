@@ -70,20 +70,6 @@ public class AllMovieView extends JFrame {
 		JButton btnNewButton = new JButton("모든 영화 ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				// TODO 내예약으로 이동하기
-				MyReservationView myRes;
-				try {
-					myRes = new MyReservationView();
-					myRes.setVisible(true);
-					setVisible(false);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				
-				
 				allMovieButton();
 			}
 		});
@@ -93,8 +79,15 @@ public class AllMovieView extends JFrame {
 		JButton btnNewButton_1 = new JButton("내 예약");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-				
+				MyReservationView myRes;
+				try {
+					myRes = new MyReservationView();
+					myRes.setVisible(true);
+					setVisible(false);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		buttonPanel.add(btnNewButton_1);
