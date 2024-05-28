@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import javax.swing.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -45,7 +45,7 @@ public class AllMovieView extends JFrame {
 	private JPanel viewPanel;
 	private JPanel buttonPanel;
 	private JTable table;
-
+	private JButton reserveButton;
 	public AllMovieView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -57,7 +57,7 @@ public class AllMovieView extends JFrame {
 		
 		viewPanel = new JPanel();
 		viewPanel.setBackground(new Color(128, 128, 128));
-		viewPanel.setBounds(12, 98, 762, 455);
+		viewPanel.setBounds(12, 98, 762, 435);
 		contentPane.add(viewPanel);
 		
 		allMovieButton();
@@ -70,10 +70,7 @@ public class AllMovieView extends JFrame {
 		JButton btnNewButton = new JButton("모든 영화 ");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-				
-=======
->>>>>>> pr/6
+
 				allMovieButton();
 			}
 		});
@@ -83,20 +80,19 @@ public class AllMovieView extends JFrame {
 		JButton btnNewButton_1 = new JButton("내 예약");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
+
 			
 				// TODO 내예약으로 이동하기
-=======
->>>>>>> pr/6
+
 				MyReservationView myRes;
 				try {
 					myRes = new MyReservationView();
 					myRes.setVisible(true);
-<<<<<<< HEAD
-					//setVisible(false);
-=======
+
 					setVisible(false);
->>>>>>> pr/6
+
+
+
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -124,11 +120,25 @@ public class AllMovieView extends JFrame {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"영화명", "감독명", "배우명", "장르"}));
 		comboBox.setBounds(295, 39, 95, 38);
 		contentPane.add(comboBox);
+		
+		reserveButton = new JButton("예매하기");
+		reserveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					reserveButton();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		reserveButton.setBounds(22, 540, 91, 23);
+		contentPane.add(reserveButton);
 	}
 	
 	
 	
-private DefaultTableModel initTable(String tableName) throws SQLException {
+	private DefaultTableModel initTable(String tableName) throws SQLException {
 		
 		ArrayList<HashMap<String, Object>> res = AdminPageRepository.findAllByName(tableName);
 		
@@ -141,7 +151,12 @@ private DefaultTableModel initTable(String tableName) throws SQLException {
 		//System.out.println(firstRow.toString());
 		
 		// table 모델 생성
-		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+			 @Override
+	            public boolean isCellEditable(int row, int column) {
+	                return false; // 모든 셀을 수정 불가로 설정
+			 }
+		};
 		// 테이블 모델에 투플 추가
 		for (HashMap<String, Object> rowMap : res) {
             Object[] rowData = new Object[columnNames.length];
@@ -166,7 +181,13 @@ private DefaultTableModel initTable(String tableName) throws SQLException {
 		System.out.println(firstRow.toString());
 		
 		// table 모델 생성
-		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+			
+			 @Override
+	            public boolean isCellEditable(int row, int column) {
+	                return false; // 모든 셀을 수정 불가로 설정
+			 }
+		};
 		// 테이블 모델에 투플 추가
 		for (HashMap<String, Object> rowMap : res) {
             Object[] rowData = new Object[columnNames.length];
@@ -226,5 +247,20 @@ private DefaultTableModel initTable(String tableName) throws SQLException {
 		viewPanel.add(table);
 		viewPanel.revalidate();
 		viewPanel.repaint();
+	}
+	private void reserveButton() throws SQLException {
+		int selectedRow = table.getSelectedRow();
+		if(selectedRow == -1) {
+			JFrame frame = new JFrame("Warning Dialog Example");
+	        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        frame.setSize(300, 200);
+	        // 경고 메시지 다이얼로그 표시
+	        JOptionPane.showMessageDialog(frame, "예매를 원하는 영화를 선택하십시오", "선택되지 않음", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		String movieName = (String) table.getValueAt(selectedRow, 1);
+		ReserveView reserveView = new ReserveView(movieName);
+		reserveView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		reserveView.setVisible(true);
 	}
 }

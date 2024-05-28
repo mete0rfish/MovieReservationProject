@@ -142,6 +142,7 @@ public class AllMovieViewWindowBuilder extends JFrame {
 		HashMap<String, Object> firstRow = res.get(0);
 		String[] columnNames = firstRow.keySet().toArray(new String[0]);
 		
+		
 		//System.out.println(firstRow.toString());
 		
 		// table 모델 생성
