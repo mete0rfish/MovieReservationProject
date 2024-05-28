@@ -13,6 +13,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,6 +25,8 @@ import Repository.ReservationRepository;
 public class MyReservationView extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
+	DefaultTableModel tableModel;
 
 	public MyReservationView() throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,9 +64,9 @@ public class MyReservationView extends JFrame{
 		panel_1.add(btnMyRes);
 		panel.setLayout(null);
 		
-		DefaultTableModel tableModel = initTable();
+		tableModel = initTable();
 		
-		JTable table = new JTable(tableModel);
+		table = new JTable(tableModel);
 		JScrollPane scrollpane = new JScrollPane(table);
 		scrollpane.setBounds(0, 0, 762, 391);
 		panel.add(scrollpane);
@@ -71,11 +74,27 @@ public class MyReservationView extends JFrame{
 		JButton btnDelete = new JButton("삭제");
 		btnDelete.setFont(new Font("Gulim", Font.PLAIN, 20));
 		btnDelete.setBounds(12, 401, 87, 44);
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO 
+				try {
+					deleteReservation();
+				} catch (NumberFormatException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		panel.add(btnDelete);
 		
 		JButton btnUpdate = new JButton("변경");
 		btnUpdate.setFont(new Font("Gulim", Font.PLAIN, 20));
 		btnUpdate.setBounds(111, 401, 111, 44);
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateReservation();
+			}
+		});
 		panel.add(btnUpdate);
 		
 		JLabel lblTips = new JLabel("* 자세한 예매 정보는 더블클릭하세요");
@@ -84,11 +103,38 @@ public class MyReservationView extends JFrame{
 		contentPane.add(lblTips);
 	}
 	
+	private void updateReservation() {
+		int[] nSelectedRow = table.getSelectedRows();
+		if(nSelectedRow.length != 1) {
+			JOptionPane.showMessageDialog(null, "한 개만 선택해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		String[] answer={"다른 일정", "다른 영화"};
+		JOptionPane.showOptionDialog(this, "같은 영화의 다른 일정, 다른 영화 중 선택하세요.", "Option"
+				,JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, answer, null );
+		
+		// TODO 입력에 따른 예매 변경으로 이동
+	}
+	
+	private void deleteReservation() throws NumberFormatException, SQLException {
+		int[] nSelectedRow = table.getSelectedRows();
+		 
+        for (int i : nSelectedRow) {
+            String str = table.getModel().getValueAt(i, 8).toString();
+            int id = Integer.parseInt(str);
+            System.out.println("ID: " + id);
+            ReservationRepository.deleteReservationById(id);
+        }
+        tableModel = initTable();
+        table.setModel(tableModel);
+        JOptionPane.showMessageDialog(null, "삭제되었습니다.");
+	}
+	
 	private DefaultTableModel initTable() throws SQLException {
 		ArrayList<HashMap<String, Object>> res = ReservationRepository.findAllWithMSAndTicket();
 		
 		if(res.size() <= 0)
-			return null;
+			return new DefaultTableModel();
 		// 칼럼 명과 첫번째 HashMap 추출
 		HashMap<String, Object> firstRow = res.get(0);
 		String[] columnNames = firstRow.keySet().toArray(new String[0]);

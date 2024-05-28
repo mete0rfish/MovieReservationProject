@@ -8,18 +8,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static sql.ReservationSql.deleteReservationByIdSql;
+
 public class ReservationRepository {
 	private static Statement stmt;
 	private static ResultSet rs;
 	
+	public static void deleteReservationById(int id) throws SQLException {
+		stmt = JdbcConnect.conn.createStatement();
+		String sql = deleteReservationByIdSql + id;
+		stmt.executeUpdate(sql);
+	}
+	
 	@SuppressWarnings("null")
 	public static ArrayList<HashMap<String, Object>> findAllWithMSAndTicket() {
-		String sql = "select ms.ms_date, ms.ms_day_of_week, ms.ms_shedule_cnt, ms.ms_time\r\n"
+		String sql = "select r.r_id, ms.ms_date, ms.ms_day_of_week, ms.ms_shedule_cnt, ms.ms_time\r\n"
 				+ ", Theater_thtr_id, t.tckt_availability, t.tckt_standard_price\r\n"
 				+ ", t.tckt_selling_price, seat_seat_id\r\n"
 				+ "from movie_schedule as ms, ticket as t, reservation as r\r\n"
 				+ "where r.movie_schedule_ms_id = ms.ms_id\r\n"
-				+ "and ms.ms_id = t.movie_schedule_ms_id;";
+				+ "and ms.ms_id = t.movie_schedule_ms_id "
+				+ "and r.User_user_id = 1;";
 		try {
 			
 			stmt = JdbcConnect.conn.createStatement();
