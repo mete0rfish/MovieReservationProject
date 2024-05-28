@@ -13,6 +13,7 @@ import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -91,8 +92,7 @@ public class MyReservationView extends JFrame{
 		btnUpdate.setBounds(111, 401, 111, 44);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO 
-				
+				updateReservation();
 			}
 		});
 		panel.add(btnUpdate);
@@ -101,6 +101,19 @@ public class MyReservationView extends JFrame{
 		lblTips.setFont(new Font("Gulim", Font.PLAIN, 23));
 		lblTips.setBounds(333, 38, 426, 45);
 		contentPane.add(lblTips);
+	}
+	
+	private void updateReservation() {
+		int[] nSelectedRow = table.getSelectedRows();
+		if(nSelectedRow.length != 1) {
+			JOptionPane.showMessageDialog(null, "한 개만 선택해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		String[] answer={"다른 일정", "다른 영화"};
+		JOptionPane.showOptionDialog(this, "같은 영화의 다른 일정, 다른 영화 중 선택하세요.", "Option"
+				,JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, answer, null );
+		
+		// TODO 입력에 따른 예매 변경으로 이동
 	}
 	
 	private void deleteReservation() throws NumberFormatException, SQLException {
@@ -114,6 +127,7 @@ public class MyReservationView extends JFrame{
         }
         tableModel = initTable();
         table.setModel(tableModel);
+        JOptionPane.showMessageDialog(null, "삭제되었습니다.");
 	}
 	
 	private DefaultTableModel initTable() throws SQLException {
