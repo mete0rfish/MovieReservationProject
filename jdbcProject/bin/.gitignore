@@ -1,3 +1,8 @@
-/sql/
-/View/
+/Controller/
+/DAO/
+/Domain/
+/JdbcProject.class
 /Repository/
+/View/
+/sql/
+/test/

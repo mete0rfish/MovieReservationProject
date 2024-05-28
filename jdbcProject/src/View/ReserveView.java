@@ -114,8 +114,13 @@ public class ReserveView extends JFrame {
 	        JOptionPane.showMessageDialog(frame, "원하는 상영시간을 선택하시오", "선택되지 않음", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
-		int schedule_id = (int) table.getValueAt(selectedRow, 0);
-		SeatSelectView seatSelectView = new SeatSelectView(schedule_id);
+		int s_id = (int) table.getValueAt(selectedRow, 0);
+		String s_time = table.getValueAt(selectedRow, 1).toString();
+		String s_date = table.getValueAt(selectedRow, 3).toString();
+		String s_thtr = table.getValueAt(selectedRow, 4).toString();
+		String s_day = (String) table.getValueAt(selectedRow, 5);
+		
+		SeatSelectView seatSelectView = new SeatSelectView(s_id,s_time,s_date,s_thtr,s_day , mName);
 		seatSelectView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		seatSelectView.setVisible(true);
 	}

@@ -42,6 +42,30 @@ public class MovieScheduleSeatSql {
                     + "(" + id + "," + "1," + msid + "," + seat_id + ");";
             	id++;    
             }
+            mssArr[4] = "insert into movie_schedule_seat values "
+            		+ "(5,0,1,5);";
+            mssArr[25] = "insert into movie_schedule_seat values"
+            		+ "(26,0,3,6);";
+            mssArr[40] = "insert into movie_schedule_seat values\r\n"
+            		+ "(41,0,5,11);";
+            mssArr[60] = "insert into movie_schedule_seat values\r\n"
+            		+ "(61,0,7,21);";
+            mssArr[84] = "insert into movie_schedule_seat values\r\n"
+            		+ "(85,0,9,25);";
+            mssArr[104] = "insert into movie_schedule_seat values\r\n"
+            		+ "(105,0,11,35);";
+            mssArr[123] = "insert into movie_schedule_seat values\r\n"
+            		+ "(124,0,13,44);";
+            mssArr[145] = "insert into movie_schedule_seat values\r\n"
+            		+ "(146,0,15,56);";
+            mssArr[164] = "insert into movie_schedule_seat values\r\n"
+            		+ "(165,0,17,105);";
+            mssArr[181] = "insert into movie_schedule_seat values\r\n"
+            		+ "(182,0,19,62);";
+            mssArr[205] = "insert into movie_schedule_seat values\r\n"
+            		+ "(206,0,21,66);";
+            mssArr[226] = "insert into movie_schedule_seat values\r\n"
+            		+ "(227,0,23,77);";
 		}
 	}
 }

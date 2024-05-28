@@ -254,8 +254,11 @@ public class AdminPageRepository {
 		try {
 			stmt = JdbcConnect.conn.createStatement();
 			stmt.executeUpdate(sql);
+			System.out.println("성공적인 "+sql);
 		} catch(SQLException e) {
-			e.getStackTrace();
+			e.printStackTrace();
+			System.out.println("실패 ! : " + sql);
+			
 		}
 	}
 }
