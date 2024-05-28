@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import javax.swing.JComboBox;
 
 public class AdminViewWindowBuilder extends JFrame {
 
@@ -65,6 +66,33 @@ public class AdminViewWindowBuilder extends JFrame {
 		btnReadAllTable.setBounds(587, 10, 149, 78);
 		contentPane.add(btnReadAllTable);
 		
+		JPanel pnQuery = new JPanel();
+		pnQuery.setBounds(0, 114, 774, 439);
+		pnQuery.setVisible(false);
+		contentPane.add(pnQuery);
+		pnQuery.setLayout(null);
+		
+		
+		tfQuery = new JTextField();
+		tfQuery.setBounds(22, 146, 729, 58);
+		pnQuery.add(tfQuery);
+		tfQuery.setColumns(10);
+		
+		JButton btnExecute = new JButton("실행");
+		btnExecute.setBounds(267, 284, 206, 71);
+		pnQuery.add(btnExecute);
+		
+		JPanel pnInit = new JPanel();
+		pnInit.setBounds(28, 152, 720, 372);
+		contentPane.add(pnInit);
+		pnInit.setLayout(null);
+		pnInit.setVisible(false);
+		
+		JLabel lblInitFinish = new JLabel("초기화되었습니다");
+		lblInitFinish.setFont(new Font("Gulim", Font.PLAIN, 27));
+		lblInitFinish.setBounds(230, 120, 318, 102);
+		pnInit.add(lblInitFinish);
+		
 		JPanel pnShowAllTable = new JPanel();
 		pnShowAllTable.setBounds(12, 136, 762, 417);
 		contentPane.add(pnShowAllTable);
@@ -88,33 +116,6 @@ public class AdminViewWindowBuilder extends JFrame {
 		JButton btnShowTableContent = new JButton("테이블 내용 보기");
 		btnShowTableContent.setBounds(266, 312, 233, 56);
 		pnShowAllTable.add(btnShowTableContent);
-		
-		JPanel pnInit = new JPanel();
-		pnInit.setBounds(28, 152, 720, 372);
-		contentPane.add(pnInit);
-		pnInit.setLayout(null);
-		pnInit.setVisible(false);
-		
-		JLabel lblInitFinish = new JLabel("초기화되었습니다");
-		lblInitFinish.setFont(new Font("Gulim", Font.PLAIN, 27));
-		lblInitFinish.setBounds(230, 120, 318, 102);
-		pnInit.add(lblInitFinish);
-		
-		JPanel pnQuery = new JPanel();
-		pnQuery.setBounds(0, 114, 774, 391);
-		pnQuery.setVisible(false);
-		contentPane.add(pnQuery);
-		pnQuery.setLayout(null);
-		
-		
-		tfQuery = new JTextField();
-		tfQuery.setBounds(54, 45, 708, 161);
-		pnQuery.add(tfQuery);
-		tfQuery.setColumns(10);
-		
-		JButton btnExecute = new JButton("실행");
-		btnExecute.setBounds(285, 243, 206, 71);
-		pnQuery.add(btnExecute);
 		
 		btnInit.addActionListener(new ActionListener() {
 
@@ -153,5 +154,7 @@ public class AdminViewWindowBuilder extends JFrame {
 			}
 			
 		});
+		
+		
 	}
 }

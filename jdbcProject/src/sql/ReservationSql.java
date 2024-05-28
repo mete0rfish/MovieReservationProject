@@ -5,9 +5,9 @@ public class ReservationSql {
 	public static String reservation1Sql = "insert into reservation values\r\n"
 			+ "	(1,'애플페이','완료',16000,'2023-05-25 14:30:00',1,1);";
 	public static String reservation2Sql = "insert into reservation values\r\n"
-			+ "	(2,'애플페이','완료',16000,'2023-05-11 14:30:00',2,3);";
+			+ "	(2,'애플페이','완료',16000,'2023-05-11 14:30:00',1,3);";
 	public static String reservation3Sql = "insert into reservation values\r\n"
-			+ "	(3,'네이버페이','완료',16000,'2023-05-16 14:30:00',3,5);";
+			+ "	(3,'네이버페이','완료',16000,'2023-05-16 14:30:00',1,5);";
 	public static String reservation4Sql = "insert into reservation values\r\n"
 			+ "	(4,'카카오페이','완료',16000,'2023-05-22 14:30:00',4,7);";
 	public static String reservation5Sql = "insert into reservation values\r\n"
@@ -26,4 +26,6 @@ public class ReservationSql {
 			+ "	(11,'애플페이','완료',16000,'2023-05-14 14:30:00',11,21);";
 	public static String reservation12Sql = "insert into reservation values\r\n"
 			+ "	(12,'애플페이','완료',16000,'2023-05-15 14:30:00',12,23);";
+	
+	public static String deleteReservationByIdSql = "DELETE FROM reservation" + " WHERE r_id = ";
 }
