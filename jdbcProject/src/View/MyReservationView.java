@@ -25,8 +25,8 @@ import javax.swing.table.DefaultTableModel;
 import Repository.ReservationRepository;
 
 public class MyReservationView extends JFrame{
-	private static final int SELCTED_SAME_MOVIE = 1;
-	private static final int SELCTED_OTHER_MOVIE = 2;
+	private static final int SELCTED_SAME_MOVIE = 0;
+	private static final int SELCTED_OTHER_MOVIE = 1;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
@@ -143,7 +143,12 @@ public class MyReservationView extends JFrame{
 		btnUpdate.setBounds(111, 401, 111, 44);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				updateReservation();
+				try {
+					updateReservation();
+				} catch (NumberFormatException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel.add(btnUpdate);
@@ -154,7 +159,8 @@ public class MyReservationView extends JFrame{
 		contentPane.add(lblTips);
 	}
 	
-	private void updateReservation() {
+	
+	private void updateReservation() throws NumberFormatException, SQLException {
 		int[] nSelectedRow = table.getSelectedRows();
 		if(nSelectedRow.length != 1) {
 			JOptionPane.showMessageDialog(null, "한 개만 선택해주세요", "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
@@ -163,10 +169,24 @@ public class MyReservationView extends JFrame{
 		String[] answer={"다른 일정", "다른 영화"};
 		int selected = JOptionPane.showOptionDialog(this, "같은 영화의 다른 일정, 다른 영화 중 선택하세요.", "Option"
 				,JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, answer, null );
-		
+		System.out.println(selected);
 		// TODO 입력에 따른 예매 변경으로 이동
-		if(selected == 0) {
+		if(selected == SELCTED_SAME_MOVIE) {
+			// TODO move_name을 받아서 ReserveView 띄우기
+			int selectedRow = table.getSelectedRow();
 			
+	        String movieName = (String) table.getModel().getValueAt(selectedRow, 2);
+	        System.out.println("ID: " + movieName);
+	        ReserveView reserveView = new ReserveView(movieName);
+	        reserveView.setVisible(true);
+	        setVisible(false);
+	        deleteReservation();
+	        
+		} else if(selected == SELCTED_OTHER_MOVIE){
+			AllMovieView allMovieView = new AllMovieView();
+			allMovieView.setVisible(true);
+			setVisible(false);
+			deleteReservation();
 		}
 	}
 	
@@ -174,10 +194,9 @@ public class MyReservationView extends JFrame{
 		int[] nSelectedRow = table.getSelectedRows();
 		 
         for (int i : nSelectedRow) {
-            String str = table.getModel().getValueAt(i, 8).toString();
-            int id = Integer.parseInt(str);
-            System.out.println("ID: " + id);
-            ReservationRepository.deleteReservationById(id);
+            int rId = (int) table.getModel().getValueAt(i, 5);
+            System.out.println("ID: " + rId);
+            ReservationRepository.deleteReservationById(rId);
         }
         tableModel = initTable();
         table.setModel(tableModel);

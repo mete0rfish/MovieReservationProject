@@ -21,10 +21,11 @@ public class ReservationRepository {
 	}
 	
 	public static ArrayList<HashMap<String, Object>> findAll(){
-		String sql = "select distinct ms_id, m_name, ms_date, Theater_thtr_id, seat_seat_id, tckt_selling_price\r\n"
-				+ "from movie, movie_schedule, ticket\r\n"
+		String sql = "select distinct r_id, m_name, ms_date, Theater_thtr_id, seat_seat_id, tckt_selling_price\r\n"
+				+ "from movie, movie_schedule as ms, ticket as t, reservation as r\r\n"
 				+ "where movie_m_id = m_id\r\n"
-				+ "and movie_schedule_ms_id = ms_id\r\n"
+				+ "and t.movie_schedule_ms_id = ms_id\r\n"
+				+ "and r.movie_schedule_ms_id = ms_id\r\n"
 				+ "and ms_id in (\r\n"
 				+ "select movie_schedule_ms_id from user, reservation\r\n"
 				+ "where User_user_id = user_id\r\n"
