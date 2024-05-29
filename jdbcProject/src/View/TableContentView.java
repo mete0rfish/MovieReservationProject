@@ -19,13 +19,13 @@ import Repository.AdminPageRepository;
 
 public class TableContentView extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	private JScrollPane contentPane;
 	private JTable table;
 
 	public TableContentView(String tableName) throws SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		contentPane = new JPanel();
+		contentPane = new JScrollPane();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);

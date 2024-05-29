@@ -160,6 +160,7 @@ public class AdminPage extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				pnInit.setVisible(false);
 				pnQuery.setVisible(false);
+				
 				pnShowAllTable.setVisible(true);
 			}
 			
@@ -176,6 +177,7 @@ public class AdminPage extends JFrame{
 				TableContentView tableContentView;
 				try {
 					tableContentView = new TableContentView(selectedValue);
+					tableContentView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					tableContentView.setVisible(true);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

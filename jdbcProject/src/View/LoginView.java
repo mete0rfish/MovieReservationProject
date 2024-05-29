@@ -53,6 +53,7 @@ public class LoginView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JdbcConnect.adminJdbcConnect();
 				AdminPage adminPage = new AdminPage();
+				adminPage.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				adminPage.setVisible(true);
 				//dispose();
 			}
@@ -63,6 +64,7 @@ public class LoginView extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JdbcConnect.userJdbcConnect();
 				AllMovieView allMovieView = new AllMovieView();
+				allMovieView.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				allMovieView.setVisible(true);
 				//dispose();
 			}

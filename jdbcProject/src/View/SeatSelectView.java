@@ -245,6 +245,9 @@ public class SeatSelectView extends JFrame {
 			addReservation(type,state);
 			addTicket();
 			
+			selectedButton.setBackground(Color.black);
+			selectedButton = null;
+			
         }
 	}
 
