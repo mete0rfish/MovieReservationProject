@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +25,8 @@ import Repository.JdbcConnect;
 import Repository.ReservationRepository;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 
 public class MyReservationWindowBuilder extends JFrame {
@@ -87,6 +92,42 @@ public class MyReservationWindowBuilder extends JFrame {
 		DefaultTableModel tableModel = initTable();
 		
 		JTable table = new JTable(tableModel);
+		table.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getClickCount() == 2) {
+					JOptionPane.showMessageDialog(null, "안녕하세요");
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+			
+		});
 		JScrollPane scrollpane = new JScrollPane(table);
 		scrollpane.setBounds(0, 0, 762, 391);
 		panel.add(scrollpane);
@@ -108,7 +149,7 @@ public class MyReservationWindowBuilder extends JFrame {
 	}
 	
 	private DefaultTableModel initTable() throws SQLException {
-		ArrayList<HashMap<String, Object>> res = ReservationRepository.findAllWithMSAndTicket();
+		ArrayList<HashMap<String, Object>> res = ReservationRepository.findAll();
 		
 		if(res.size() <= 0)
 			return null;
@@ -117,9 +158,14 @@ public class MyReservationWindowBuilder extends JFrame {
 		String[] columnNames = firstRow.keySet().toArray(new String[0]);
 		
 		//System.out.println(firstRow.toString());
-		
+
 		// table 모델 생성
-		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+					return false;
+			}
+		};
 		
 		// 테이블 모델에 투플 추가
 		for (HashMap<String, Object> rowMap : res) {
@@ -129,6 +175,12 @@ public class MyReservationWindowBuilder extends JFrame {
             }
             tableModel.addRow(rowData);
         }
+        
+		
 		return tableModel;
 	}
+	
+	
+
 }
+
