@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
 import Repository.ReservationRepository;
 
 public class MyReservationView extends JFrame{
+	private static final int SELCTED_SAME_MOVIE = 1;
+	private static final int SELCTED_OTHER_MOVIE = 2;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
@@ -67,6 +71,53 @@ public class MyReservationView extends JFrame{
 		tableModel = initTable();
 		
 		table = new JTable(tableModel);
+		table.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getClickCount() == 2) {
+					int row = table.getSelectedRow();
+					//String movieName = (String) table.getValueAt(row, );
+					int msId = (int) table.getValueAt(row, 0);
+					System.out.println(msId);
+					try {
+						ReservationDetail rd = new ReservationDetail(msId);
+						rd.setVisible(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+			
+		});
+		
 		JScrollPane scrollpane = new JScrollPane(table);
 		scrollpane.setBounds(0, 0, 762, 391);
 		panel.add(scrollpane);
@@ -110,10 +161,13 @@ public class MyReservationView extends JFrame{
 			return;
 		}
 		String[] answer={"다른 일정", "다른 영화"};
-		JOptionPane.showOptionDialog(this, "같은 영화의 다른 일정, 다른 영화 중 선택하세요.", "Option"
+		int selected = JOptionPane.showOptionDialog(this, "같은 영화의 다른 일정, 다른 영화 중 선택하세요.", "Option"
 				,JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, answer, null );
 		
 		// TODO 입력에 따른 예매 변경으로 이동
+		if(selected == 0) {
+			
+		}
 	}
 	
 	private void deleteReservation() throws NumberFormatException, SQLException {
@@ -131,7 +185,7 @@ public class MyReservationView extends JFrame{
 	}
 	
 	private DefaultTableModel initTable() throws SQLException {
-		ArrayList<HashMap<String, Object>> res = ReservationRepository.findAllWithMSAndTicket();
+		ArrayList<HashMap<String, Object>> res = ReservationRepository.findAll();
 		
 		if(res.size() <= 0)
 			return new DefaultTableModel();
@@ -142,7 +196,12 @@ public class MyReservationView extends JFrame{
 		//System.out.println(firstRow.toString());
 		
 		// table 모델 생성
-		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+					return false;
+			}
+		};
 		
 		// 테이블 모델에 투플 추가
 		for (HashMap<String, Object> rowMap : res) {
