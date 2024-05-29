@@ -22,7 +22,7 @@ public class ReservationRepository {
 	
 	@SuppressWarnings("null")
 	public static ArrayList<HashMap<String, Object>> findAllWithMSAndTicket() {
-		String sql = "select r.r_id, ms.ms_date, ms.ms_day_of_week, ms.ms_shedule_cnt, ms.ms_time\r\n"
+		String sql = "select distinct r.r_id, ms.ms_date, ms.ms_day_of_week, ms.ms_shedule_cnt, ms.ms_time\r\n"
 				+ ", Theater_thtr_id, t.tckt_availability, t.tckt_standard_price\r\n"
 				+ ", t.tckt_selling_price, seat_seat_id\r\n"
 				+ "from movie_schedule as ms, ticket as t, reservation as r\r\n"
