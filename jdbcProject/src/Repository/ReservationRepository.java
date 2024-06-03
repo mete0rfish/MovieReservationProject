@@ -22,15 +22,12 @@ public class ReservationRepository {
 	
 	public static ArrayList<HashMap<String, Object>> findAll(){
 		// TODO ms_id
-		String sql = "select distinct r_id, m_name, ms_date, Theater_thtr_id, seat_seat_id, tckt_selling_price, ms_id\r\n"
+		String sql = "select r_id, m_name, ms_date, Theater_thtr_id, seat_seat_id, tckt_selling_price, ms_id\r\n"
 				+ "from movie, movie_schedule as ms, ticket as t, reservation as r\r\n"
 				+ "where movie_m_id = m_id\r\n"
 				+ "and t.movie_schedule_ms_id = ms_id\r\n"
 				+ "and r.movie_schedule_ms_id = ms_id\r\n"
-				+ "and tckt_id in (\r\n"
-				+ "select Ticket_tckt_id from user, reservation as r\r\n"
-				+ "where User_user_id = user_id\r\n"
-				+ "and user_id = 1);\r\n";
+				+ "and tckt_id = Ticket_tckt_id;\r\n";
 		try {
 			stmt = JdbcConnect.conn.createStatement();
 			rs = stmt.executeQuery(sql);

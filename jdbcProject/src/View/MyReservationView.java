@@ -196,10 +196,11 @@ public class MyReservationView extends JFrame{
 		 
         for (int i : nSelectedRow) {
             int rId = (int) table.getModel().getValueAt(i, 6);
+            int msId = (int) table.getModel().getValueAt(i, 0);
             int seatId = (int) table.getModel().getValueAt(i, 5);
             System.out.println("ID: " + rId);
             ReservationRepository.deleteReservationById(rId);
-            MovieScheduleRepository.updateMssSeatAvailable(rId, seatId);
+            MovieScheduleRepository.updateMssSeatAvailable(msId, seatId);
         }
         tableModel = initTable();
         table.setModel(tableModel);

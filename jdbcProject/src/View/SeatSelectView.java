@@ -242,8 +242,9 @@ public class SeatSelectView extends JFrame {
 		
 		if (response == JOptionPane.YES_OPTION) {
 			updateMSS();
-			addReservation(type,state);
 			addTicket();
+			addReservation(type,state);
+			
 			
 			selectedButton.setBackground(Color.black);
 			selectedButton = null;
