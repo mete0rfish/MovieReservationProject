@@ -27,10 +27,10 @@ public class ReservationRepository {
 				+ "where movie_m_id = m_id\r\n"
 				+ "and t.movie_schedule_ms_id = ms_id\r\n"
 				+ "and r.movie_schedule_ms_id = ms_id\r\n"
-				+ "and ms_id in (\r\n"
-				+ "select movie_schedule_ms_id from user, reservation\r\n"
+				+ "and tckt_id in (\r\n"
+				+ "select Ticket_tckt_id from user, reservation as r\r\n"
 				+ "where User_user_id = user_id\r\n"
-				+ "and user_id = 1);";
+				+ "and user_id = 1);\r\n";
 		try {
 			stmt = JdbcConnect.conn.createStatement();
 			rs = stmt.executeQuery(sql);
