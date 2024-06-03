@@ -16,9 +16,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import DAO.LoginUserResponse;
+
 import Repository.JdbcConnect;
-import Repository.UserRepository;
+
 
 public class LoginView extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -47,6 +47,11 @@ public class LoginView extends JFrame {
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 48));
 		lblNewLabel.setBounds(266, 76, 260, 85);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("현재 날짜 : 2023/06/01");
+		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(276, 165, 307, 67);
+		contentPane.add(lblNewLabel_1);
 		
 		btnAdmin.addActionListener(new ActionListener() {
 			@Override

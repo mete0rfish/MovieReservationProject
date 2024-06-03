@@ -33,6 +33,7 @@ public class ReserveView extends JFrame {
 	private JTable table;
 	private String mName;
 	private JButton reserveButton;
+	private JLabel lblNewLabel;
 
 	public ReserveView(String movieName) throws SQLException {
 		mName = movieName;
@@ -70,6 +71,11 @@ public class ReserveView extends JFrame {
 		});
 		reserveButton.setBounds(624, 98, 150, 67);
 		contentPane.add(reserveButton);
+		
+		lblNewLabel = new JLabel("현재 날짜 : 2023/06/01");
+		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 14));
+		lblNewLabel.setBounds(35, 0, 391, 67);
+		contentPane.add(lblNewLabel);
 	}
 	
 	

@@ -161,7 +161,12 @@ public class SeatSelectView extends JFrame {
 		kakaoPay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				payButton(kakaoPay.getText(),"완료");
+				try {
+					payButton(kakaoPay.getText(),"완료");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_1.add(kakaoPay);
@@ -171,7 +176,12 @@ public class SeatSelectView extends JFrame {
 		applePay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				payButton(applePay.getText(),"완료");
+				try {
+					payButton(applePay.getText(),"완료");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_1.add(applePay);
@@ -181,7 +191,12 @@ public class SeatSelectView extends JFrame {
 		naverPay.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				payButton(naverPay.getText(),"완료");
+				try {
+					payButton(naverPay.getText(),"완료");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_1.add(naverPay);
@@ -191,7 +206,12 @@ public class SeatSelectView extends JFrame {
 		cash.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				payButton(cash.getText(),"미완료");
+				try {
+					payButton(cash.getText(),"미완료");
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel_1.add(cash);
@@ -229,7 +249,7 @@ public class SeatSelectView extends JFrame {
 	    }
 	}
 	
-	private void payButton(String type, String state) {
+	private void payButton(String type, String state) throws SQLException {
 		if(selectedButton == null) {
 			JOptionPane.showMessageDialog(null, "좌석을 선택해주세요", "좌석 선택 안함", JOptionPane.WARNING_MESSAGE);
 			return;
@@ -252,14 +272,15 @@ public class SeatSelectView extends JFrame {
         }
 	}
 
-	private void updateMSS() {
+	private void updateMSS() throws SQLException {
 		int seat_id = (thtr_num-1)*10 +Integer.parseInt(selectedButton.getText());
 		String sql = "update movie_schedule_seat set mss_seat_available = 0 where movie_schedule_ms_id = "+id+" and seat_seat_id = "+seat_id+";";
 		System.out.println("id ="+id +"ssid = " +seat_id);
 		System.out.println(sql);
-		AdminPageRepository.executeQuery(sql);
+		stmt = JdbcConnect.conn.createStatement();
+		stmt.executeUpdate(sql);
 	}
-	private void addReservation(String type, String state) {
+	private void addReservation(String type, String state) throws SQLException {
 		//티켓의 PK 알아오기
 		String sql = "SELECT MAX(tckt_id) as tckt_id FROM ticket;";
 		int tcktId = -1;
@@ -286,17 +307,20 @@ public class SeatSelectView extends JFrame {
 		sql = "insert into reservation (r_payment,r_pay_status,r_pay_amount,r_pay_date,User_user_id,movie_schedule_ms_id,Ticket_tckt_id) values ('"+
 		pay+"','"+payState+"',14000,'2023-06-01 "+formattedTime+"',1,"+id+","+tcktId+");";
 		System.out.println(sql);
-		AdminPageRepository.executeQuery(sql);
+		stmt = JdbcConnect.conn.createStatement();
+		stmt.executeUpdate(sql);
+
 	}
 	
-	private void addTicket() {
+	private void addTicket() throws SQLException {
 		int seat_id = (thtr_num-1)*10 +Integer.parseInt(selectedButton.getText());
 		
 		String sql = "insert into Ticket (tckt_availability,tckt_standard_price,tckt_selling_price,seat_seat_id,movie_schedule_ms_id) "
 				+ "values (0,16000,16000,"+seat_id+","+id+");";
 				
 		System.out.println(sql);
-		AdminPageRepository.executeQuery(sql);
+		stmt = JdbcConnect.conn.createStatement();
+		stmt.executeUpdate(sql);
 		
 	}
 	

@@ -46,6 +46,7 @@ public class AllMovieView extends JFrame {
 	private JPanel buttonPanel;
 	private JTable table;
 	private JButton reserveButton;
+	private JLabel lblNewLabel;
 	public AllMovieView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
@@ -134,6 +135,10 @@ public class AllMovieView extends JFrame {
 		});
 		reserveButton.setBounds(22, 540, 91, 23);
 		contentPane.add(reserveButton);
+		
+		lblNewLabel = new JLabel("평점              영화제목            개봉날짜         감독명              배우명              정보              러닝타임              순서              장르              상영등급");
+		lblNewLabel.setBounds(22, 73, 762, 30);
+		contentPane.add(lblNewLabel);
 	}
 	
 	
