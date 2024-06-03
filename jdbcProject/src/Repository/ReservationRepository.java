@@ -21,7 +21,8 @@ public class ReservationRepository {
 	}
 	
 	public static ArrayList<HashMap<String, Object>> findAll(){
-		String sql = "select distinct r_id, m_name, ms_date, Theater_thtr_id, seat_seat_id, tckt_selling_price\r\n"
+		// TODO ms_id
+		String sql = "select distinct r_id, m_name, ms_date, Theater_thtr_id, seat_seat_id, tckt_selling_price, ms_id\r\n"
 				+ "from movie, movie_schedule as ms, ticket as t, reservation as r\r\n"
 				+ "where movie_m_id = m_id\r\n"
 				+ "and t.movie_schedule_ms_id = ms_id\r\n"
@@ -55,11 +56,12 @@ public class ReservationRepository {
 	@SuppressWarnings("null")
 	public static ArrayList<HashMap<String, Object>> findById(int id) {
 		String sql = "select distinct ms.ms_date, ms.ms_day_of_week, ms.ms_shedule_cnt, ms.ms_time\r\n"
-				+ ", Theater_thtr_id, t.tckt_availability, t.tckt_standard_price\r\n"
+				+ ",Theater_thtr_id, t.tckt_availability, t.tckt_standard_price\r\n"
 				+ ", t.tckt_selling_price, seat_seat_id\r\n"
-				+ "from movie_schedule as ms, ticket as t\r\n"
+				+ "from movie_schedule as ms, ticket as t, reservation as r\r\n"
 				+ "where ms.ms_id = t.movie_schedule_ms_id\r\n"
-				+ "and ms_id = "+ id + ";";
+				+ "and ms.ms_id = r.movie_schedule_ms_id\r\n"
+				+ "and r_id = "+ id + ";";
 		try {
 			
 			stmt = JdbcConnect.conn.createStatement();
