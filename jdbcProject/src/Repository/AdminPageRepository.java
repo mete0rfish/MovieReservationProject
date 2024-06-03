@@ -169,8 +169,8 @@ public class AdminPageRepository {
 		try {
 			
 			stmt.executeUpdate(dropMssSql);
-			stmt.executeUpdate(dropTicketSql);
 			stmt.executeUpdate(dropReservationSql);
+			stmt.executeUpdate(dropTicketSql);
 			stmt.executeUpdate(dropMsSql);
 			stmt.executeUpdate(dropSeatSql);
 			stmt.executeUpdate(dropUserSql);

@@ -1,11 +1,2 @@
-<<<<<<< Updated upstream
-/Controller/
-/DAO/
-/Domain/
-/JdbcProject.class
-/Repository/
 /View/
-/sql/
-=======
->>>>>>> Stashed changes
-/test/
+/Repository/

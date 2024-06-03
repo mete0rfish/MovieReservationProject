@@ -259,6 +259,22 @@ public class SeatSelectView extends JFrame {
 		AdminPageRepository.executeQuery(sql);
 	}
 	private void addReservation(String type, String state) {
+		//티켓의 PK 알아오기
+		String sql = "SELECT MAX(tckt_id) as tckt_id FROM ticket;";
+		int tcktId = -1;
+		try {
+			stmt = JdbcConnect.conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			tcktId = rs.getInt("tckt_id");
+			System.out.println(tcktId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		String pay = type;
 		String payState = state;
 		LocalTime currentTime = LocalTime.now();
@@ -266,9 +282,9 @@ public class SeatSelectView extends JFrame {
         // 현재 시간을 "HH:mm:ss" 형식의 문자열로 포맷팅
         String formattedTime = currentTime.format(formatter);
 		
-		String sql = "insert into reservation (r_payment,r_pay_status,r_pay_amount,r_pay_date,User_user_id,movie_schedule_ms_id) values ('"+
-		pay+"','"+payState+"',14000,'2023-06-01 "+formattedTime+"',1,"+id+");";
-		//System.out.println(sql);
+		sql = "insert into reservation (r_payment,r_pay_status,r_pay_amount,r_pay_date,User_user_id,movie_schedule_ms_id,Ticket_tckt_id) values ('"+
+		pay+"','"+payState+"',14000,'2023-06-01 "+formattedTime+"',1,"+id+","+tcktId+");";
+		System.out.println(sql);
 		AdminPageRepository.executeQuery(sql);
 	}
 	
@@ -280,6 +296,7 @@ public class SeatSelectView extends JFrame {
 				
 		System.out.println(sql);
 		AdminPageRepository.executeQuery(sql);
+		
 	}
 	
 	private boolean canReserveSeat(int seat_id) {
