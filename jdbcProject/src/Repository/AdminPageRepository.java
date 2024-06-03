@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import static Repository.InitDataRepository.*;
 
 public class AdminPageRepository {
@@ -261,8 +263,10 @@ public class AdminPageRepository {
 		try {
 			stmt = JdbcConnect.conn.createStatement();
 			stmt.executeUpdate(sql);
+			JOptionPane.showMessageDialog(null, "SQL이 정상적으로 실행되었습니다.");
 			System.out.println("성공적인 "+sql);
 		} catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "SQL 오류가 발생했습니다", "SQL 오류", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.out.println("실패 ! : " + sql);
 			
