@@ -37,4 +37,15 @@ public class MovieScheduleRepository {
 		}
 		return null;	
 	}
+	
+	public static void updateMssSeatAvailable(int msId, int seatId) {
+		String sql = "update movie_schedule_seat set mss_seat_available = 1 where movie_schedule_ms_id = "+msId+" and seat_seat_id = "+seatId+";";
+		try {
+			stmt = JdbcConnect.conn.createStatement();
+			stmt.execute(sql);
+			System.out.println("updated "+msId + ", seatId: " + seatId);
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

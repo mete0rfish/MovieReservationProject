@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Repository.MovieScheduleRepository;
 import Repository.ReservationRepository;
 
 public class MyReservationView extends JFrame{
@@ -79,10 +80,10 @@ public class MyReservationView extends JFrame{
 				if(e.getClickCount() == 2) {
 					int row = table.getSelectedRow();
 					//String movieName = (String) table.getValueAt(row, );
-					int msId = (int) table.getValueAt(row, 0);
-					System.out.println(msId);
+					int rId = (int) table.getValueAt(row, 6);
+					System.out.println(rId);
 					try {
-						ReservationDetail rd = new ReservationDetail(msId);
+						ReservationDetail rd = new ReservationDetail(rId);
 						rd.setVisible(true);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -194,14 +195,16 @@ public class MyReservationView extends JFrame{
 		int[] nSelectedRow = table.getSelectedRows();
 		 
         for (int i : nSelectedRow) {
-            int rId = (int) table.getModel().getValueAt(i, 5);
+            int rId = (int) table.getModel().getValueAt(i, 6);
+            int seatId = (int) table.getModel().getValueAt(i, 5);
             System.out.println("ID: " + rId);
             ReservationRepository.deleteReservationById(rId);
+            MovieScheduleRepository.updateMssSeatAvailable(rId, seatId);
         }
         tableModel = initTable();
         table.setModel(tableModel);
         JOptionPane.showMessageDialog(null, "삭제되었습니다.");
-	}
+    }
 	
 	private DefaultTableModel initTable() throws SQLException {
 		ArrayList<HashMap<String, Object>> res = ReservationRepository.findAll();
