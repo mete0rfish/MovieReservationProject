@@ -223,6 +223,7 @@ public class AllMovieView extends JFrame {
 			DefaultTableModel tableModel = findMovieTable(name,searchField.getText());
 			table = new JTable(tableModel);
 			table.setBounds(22, 105, 741, 448);
+			
 			viewPanel.removeAll();
 			viewPanel.add(table);
 			viewPanel.revalidate();

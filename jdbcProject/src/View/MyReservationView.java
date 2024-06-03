@@ -85,6 +85,7 @@ public class MyReservationView extends JFrame{
 					try {
 						ReservationDetail rd = new ReservationDetail(rId);
 						rd.setVisible(true);
+						rd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -176,7 +177,7 @@ public class MyReservationView extends JFrame{
 			// TODO move_name을 받아서 ReserveView 띄우기
 			int selectedRow = table.getSelectedRow();
 			
-	        String movieName = (String) table.getModel().getValueAt(selectedRow, 2);
+	        String movieName = (String) table.getModel().getValueAt(selectedRow, 1);
 	        System.out.println("ID: " + movieName);
 	        ReserveView reserveView = new ReserveView(movieName);
 	        reserveView.setVisible(true);

@@ -58,6 +58,7 @@ public class ReservationRepository {
 				+ "from movie_schedule as ms, ticket as t, reservation as r\r\n"
 				+ "where ms.ms_id = t.movie_schedule_ms_id\r\n"
 				+ "and ms.ms_id = r.movie_schedule_ms_id\r\n"
+				+ "and r.Ticket_tckt_id = t.tckt_id\r\n"
 				+ "and r_id = "+ id + ";";
 		try {
 			

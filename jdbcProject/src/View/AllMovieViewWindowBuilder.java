@@ -24,6 +24,7 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 public class AllMovieViewWindowBuilder extends JFrame {
 
@@ -33,6 +34,7 @@ public class AllMovieViewWindowBuilder extends JFrame {
 	private JTable table;
 	private JComboBox<String> comboBox;
 	private JPanel viewPanel;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -77,7 +79,10 @@ public class AllMovieViewWindowBuilder extends JFrame {
 		
 		table = new JTable(tableModel);
 		table.setBounds(22, 105, 741, 448);
-		viewPanel.add(table);
+		//viewPanel.add(table);
+		
+		scrollPane = new JScrollPane(table);
+		viewPanel.add(scrollPane);
 		
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setBounds(12, 20, 268, 57);
