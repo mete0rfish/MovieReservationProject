@@ -35,7 +35,11 @@ public class TableContentView extends JFrame {
 		
 		table = new JTable(tableModel);
 		table.setBounds(22, 105, 741, 448);
-		contentPane.add(table);
+//		contentPane.add(table);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(0, 0, 762, 391);
+		contentPane.add(scrollPane);
 		
 //		JScrollPane scrollPane = new JScrollPane(table);
 //		contentPane.add(scrollPane, BorderLayout.CENTER);

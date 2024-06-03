@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JScrollPane;
 
 public class TableContentWindowBuilder extends JFrame {
 
@@ -46,6 +47,10 @@ public class TableContentWindowBuilder extends JFrame {
 		table = new JTable();
 		table.setBounds(22, 105, 741, 448);
 		contentPane.add(table);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 2, 2);
+		contentPane.add(scrollPane);
 		
 		JLabel lblTableName = new JLabel("테이블 이름");
 		lblTableName.setFont(new Font("Gulim", Font.PLAIN, 32));
